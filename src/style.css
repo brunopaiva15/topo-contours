@@ -196,6 +196,29 @@ body {
   opacity: 1;
 }
 
+.site-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 2;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--faint);
+}
+
+.site-footer a {
+  color: var(--faint);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+
+.site-footer a:hover {
+  color: var(--muted);
+  text-decoration: underline;
+}
+
 .search-hero {
   position: relative;
   z-index: 1;
@@ -513,8 +536,10 @@ body {
   border-radius: 2px;
 }
 
-#thumb:hover ~ #thumb-zoom {
+#thumb:hover ~ #thumb-zoom,
+.thumb-zoom.open {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .thumb.hidden ~ .thumb-zoom {
@@ -1079,9 +1104,9 @@ body {
     bottom: 118px;
   }
 
-  /* Aperçu-zoom au survol : inutile au doigt */
-  .thumb-zoom {
-    display: none;
+  /* Au doigt, l'aperçu agrandi s'ouvre en touchant la vignette (voir .open). */
+  .thumb-zoom svg {
+    max-width: 88%;
   }
 
   /* Étape 3 : poster */
