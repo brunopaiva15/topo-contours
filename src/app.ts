@@ -96,12 +96,16 @@ export class App {
 
     this.slideshow = new SlideShow($("#hero-slideshow"), $("#slide-caption"));
 
+    const yearEl = document.getElementById("footer-year");
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
     this.buildQuickChips();
     this.buildPresets();
     this.buildDetail();
     this.bindStepper();
     this.bindSearch();
     this.bindFrame();
+    this.bindThumbZoom();
     this.bindResultPanel();
 
     this.store.subscribe(() => this.scheduleRender());
@@ -302,6 +306,23 @@ export class App {
     });
   }
 
+  /**
+   * Aperçu agrandi de la vignette. Sur ordinateur le survol suffit, mais au
+   * doigt il faut pouvoir toucher la vignette pour l'ouvrir, puis toucher
+   * n'importe où sur l'aperçu pour le refermer.
+   */
+  private bindThumbZoom(): void {
+    const thumb = $("#thumb");
+    const zoom = $("#thumb-zoom");
+    thumb.addEventListener("click", () => {
+      if (thumb.classList.contains("hidden") || thumb.classList.contains("loading")) {
+        return;
+      }
+      zoom.classList.add("open");
+    });
+    zoom.addEventListener("click", () => zoom.classList.remove("open"));
+  }
+
   private onFrameMove(): void {
     if (this.step !== 2) return;
     // Annule toute génération en cours tant que la carte bouge.
@@ -312,6 +333,8 @@ export class App {
     const thumb = $("#thumb");
     thumb.classList.remove("hidden");
     thumb.classList.add("loading");
+    // L'aperçu agrandi devient obsolète dès que la carte bouge.
+    $("#thumb-zoom").classList.remove("open");
   }
 
   // ---------- Génération ----------

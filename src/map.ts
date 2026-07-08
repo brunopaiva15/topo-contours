@@ -54,7 +54,16 @@ export class ViewfinderMap {
       center: [7.6586, 45.9763], // Cervin
       zoom: 12,
       attributionControl: { compact: true },
+      // Cadre-viseur toujours orienté nord : la rotation ou l'inclinaison
+      // (faciles à déclencher à deux doigts sur mobile) fausseraient le calcul
+      // de la bbox et donneraient un poster au mauvais format.
+      dragRotate: false,
+      pitchWithRotate: false,
+      touchPitch: false,
     });
+    // Empêche la rotation à deux doigts tout en gardant le zoom pincé.
+    this.map.touchZoomRotate.disableRotation();
+    this.map.keyboard.disableRotation();
     this.map.addControl(
       new maplibregl.NavigationControl({ showCompass: false }),
       "bottom-right",
