@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>Poster topographique</title>
+    <link
+      rel="preconnect"
+      href="https://tile.openstreetmap.org"
+      crossorigin
+    />
+  </head>
+  <body>
+    <div id="app">
+      <nav id="stepper" aria-label="Étapes">
+        <button id="step-back" class="step-back" type="button" aria-label="Retour">←</button>
+        <ol class="dots">
+          <li id="dot-1" class="dot">Lieu</li>
+          <li id="dot-2" class="dot">Cadrage</li>
+          <li id="dot-3" class="dot">Poster</li>
+        </ol>
+      </nav>
+
+      <!-- Étape 1 : Où ? -->
+      <section id="step-search" class="step">
+        <div id="hero-slideshow" class="hero-slideshow" aria-hidden="true">
+          <div id="slide-caption" class="slide-caption"></div>
+        </div>
+        <div class="search-hero">
+          <h1>Créez le poster topographique de votre lieu</h1>
+          <div class="search-field">
+            <input
+              id="search-input"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Une adresse, une montagne, une ville…"
+              aria-label="Rechercher un lieu"
+            />
+            <ul id="suggestions" class="suggestions" role="listbox"></ul>
+          </div>
+          <div id="quick-chips" class="quick-chips"></div>
+        </div>
+      </section>
+
+      <!-- Étape 2 : Cadrez -->
+      <section id="step-frame" class="step">
+        <div class="frame-top">
+          <div id="format-buttons" class="format-buttons">
+            <button type="button" class="format-btn" data-format="portrait">
+              <span class="format-glyph portrait"></span>Portrait
+            </button>
+            <button type="button" class="format-btn" data-format="square">
+              <span class="format-glyph square"></span>Carré
+            </button>
+            <button type="button" class="format-btn" data-format="landscape">
+              <span class="format-glyph landscape"></span>Paysage
+            </button>
+          </div>
+        </div>
+        <div id="map"></div>
+        <div id="thumb" class="thumb hidden">
+          <div id="thumb-img" class="thumb-img"></div>
+          <div id="thumb-spinner" class="thumb-spinner"></div>
+        </div>
+        <div id="thumb-zoom" class="thumb-zoom" aria-hidden="true"></div>
+        <div class="frame-bottom">
+          <p class="frame-hint">Déplacez la carte pour cadrer votre lieu</p>
+          <button id="btn-create" class="btn primary" type="button">
+            Créer mon poster →
+          </button>
+        </div>
+      </section>
+
+      <!-- Étape 3 : Votre poster -->
+      <section id="step-result" class="step">
+        <div class="result-stage">
+          <div id="poster-stage" class="poster-stage"></div>
+          <div id="gen-overlay" class="gen-overlay">
+            <div class="gen-spinner"></div>
+            <div id="gen-message" class="gen-message">Lecture du relief…</div>
+          </div>
+        </div>
+
+        <aside class="result-panel">
+          <div class="panel-block">
+            <h2>Style</h2>
+            <div id="presets" class="presets"></div>
+          </div>
+
+          <div class="panel-block">
+            <h2>Niveau de détail</h2>
+            <div id="detail" class="seg detail-seg"></div>
+          </div>
+
+          <div class="panel-block">
+            <label class="title-toggle">
+              <input id="title-toggle" type="checkbox" />
+              <span>Afficher le titre du lieu</span>
+            </label>
+            <input
+              id="title-input"
+              class="title-input"
+              type="text"
+              placeholder="Nom du lieu"
+            />
+          </div>
+
+          <div class="panel-block download-block">
+            <button id="btn-download" class="btn primary big" type="button">
+              Télécharger le poster
+            </button>
+            <button id="btn-svg" class="linklike" type="button">
+              Aussi disponible en SVG
+            </button>
+          </div>
+
+          <div class="panel-block">
+            <button id="advanced-toggle" class="advanced-toggle" type="button">
+              Réglages avancés
+              <span class="chev">▾</span>
+            </button>
+            <div id="advanced" class="advanced hidden"></div>
+          </div>
+        </aside>
+      </section>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

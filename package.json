@@ -1,0 +1,23 @@
+{
+  "name": "topo-contour-poster",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Générateur de posters de contours topographiques (Vite + TypeScript, MapLibre, d3-contour).",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "d3-array": "^3.2.4",
+    "d3-contour": "^4.0.2",
+    "maplibre-gl": "^4.7.1"
+  },
+  "devDependencies": {
+    "@types/d3-array": "^3.2.1",
+    "@types/d3-contour": "^3.0.6",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  }
+}
